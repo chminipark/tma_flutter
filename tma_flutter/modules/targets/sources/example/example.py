@@ -1,4 +1,4 @@
-import typer, os
+import typer, os, shutil
 from typing_extensions import Annotated
 from pathlib import Path
 from tma_flutter.snippets.sources import flutter, template
@@ -26,36 +26,37 @@ def copy_template(
     example_name: str,
     view_name: str,
 ):
-    example_path = get_example_path()
+    example_path = _get_example_path()
     lib_path = example_path.joinpath("lib")
     test_path = example_path.joinpath("test")
-    template.remove_dir_content(lib_path)
-    template.remove_dir_content(test_path)
+    template.prepare_copy(lib_path, test_path)
 
     template_path = Path(__file__).absolute().parent.joinpath("templates")
     template.copy(
-        copy_file_parent_path=template_path.joinpath("lib"),
-        file_name="main.dart",
+        copy_path=template_path.joinpath("lib"),
+        copy_file="main.dart",
+        paste_path=lib_path,
+        paste_file="main.dart",
         template_variables={
             "example_snake": example_name,
             "example_pascal": template.pascal_case(example_name),
         },
-        to_save_path=lib_path.joinpath(f"main.dart"),
     )
     template.copy(
-        copy_file_parent_path=template_path.joinpath("lib"),
-        file_name="example.dart",
+        copy_path=template_path.joinpath("lib"),
+        copy_file="example.dart",
+        paste_path=lib_path,
+        paste_file=f"{example_name}.dart",
         template_variables={
             "example_pascal": template.pascal_case(example_name),
             "view_snake": view_name,
             "view_pascal": template.pascal_case(view_name),
         },
-        to_save_path=lib_path.joinpath(f"{example_name}.dart"),
     )
 
 
 def add_view_dependency(view_name: str):
-    example_path = get_example_path()
+    example_path = _get_example_path()
     os.chdir(example_path)
     flutter.add_dependency(
         target_name=view_name,
@@ -64,7 +65,7 @@ def add_view_dependency(view_name: str):
     os.chdir(example_path.parent)
 
 
-def get_example_path() -> Path:
+def _get_example_path() -> Path:
     return Path(os.getcwd()).joinpath("examples")
 
 

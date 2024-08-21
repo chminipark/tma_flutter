@@ -29,14 +29,14 @@ def copy_template(
     feature_path = _get_feature_path()
     lib_path = feature_path.joinpath("lib")
     test_path = feature_path.joinpath("test")
-    template.remove_dir_content(lib_path)
-    template.remove_dir_content(test_path)
+    template.prepare_copy(lib_path, test_path)
 
     template_path = Path(__file__).absolute().parent.joinpath("templates")
     template.copy(
-        copy_file_parent_path=template_path.joinpath("lib"),
-        file_name="feature.dart",
-        to_save_path=lib_path.joinpath(f"{feature_name}.dart"),
+        copy_path=template_path.joinpath("lib"),
+        copy_file="feature.dart",
+        paste_path=lib_path,
+        paste_file=f"{feature_name}.dart",
         template_variables={
             "interface_snake": interface_name,
         },
