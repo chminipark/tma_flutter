@@ -22,8 +22,11 @@ def name(project_name: str) -> str:
     return project_name + "_" + "feature"
 
 
-def copy_template(feature_name: str):
-    feature_path = Path(os.getcwd()).joinpath("features")
+def copy_template(
+    feature_name: str,
+    interface_name: str,
+):
+    feature_path = _get_feature_path()
     lib_path = feature_path.joinpath("lib")
     test_path = feature_path.joinpath("test")
     template.remove_dir_content(lib_path)
@@ -34,15 +37,25 @@ def copy_template(feature_name: str):
         copy_file_parent_path=template_path.joinpath("lib"),
         file_name="feature.dart",
         to_save_path=lib_path.joinpath(f"{feature_name}.dart"),
-    )
-    template.copy(
-        copy_file_parent_path=template_path.joinpath("test"),
-        file_name="feature_test.dart",
-        to_save_path=lib_path.joinpath(f"{feature_name}_test.dart"),
         template_variables={
-            "feature_snake": feature_name,
+            "interface_snake": interface_name,
         },
     )
+
+
+def add_dependency(interface_name: str):
+    feature_path = _get_feature_path()
+    os.chdir(feature_path)
+    flutter.add_dependency(
+        target_name=interface_name,
+        target_path="../interfaces",
+    )
+    os.chdir(feature_path.parent)
+    return
+
+
+def _get_feature_path() -> Path:
+    return Path(os.getcwd()).joinpath("features")
 
 
 if __name__ == "__main__":

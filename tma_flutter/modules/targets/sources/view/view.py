@@ -27,7 +27,7 @@ def copy_template(
     view_name: str,
     feature_name: str,
 ):
-    view_path = get_view_path()
+    view_path = _get_view_path()
     lib_path = view_path.joinpath("lib")
     test_path = view_path.joinpath("test")
     template.remove_dir_content(lib_path)
@@ -45,8 +45,8 @@ def copy_template(
     )
 
 
-def add_feature_dependency(feature_name: str):
-    view_path = get_view_path()
+def add_dependency(feature_name: str):
+    view_path = _get_view_path()
     os.chdir(view_path)
     flutter.add_dependency(
         target_name=feature_name,
@@ -55,7 +55,7 @@ def add_feature_dependency(feature_name: str):
     os.chdir(view_path.parent)
 
 
-def get_view_path() -> Path:
+def _get_view_path() -> Path:
     return Path(os.getcwd()).joinpath("views")
 
 

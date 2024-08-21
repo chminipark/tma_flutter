@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-from tma_flutter.modules.targets.sources import test, interface
+from tma_flutter.modules.targets.sources.interface import interface
+from tma_flutter.modules.targets.sources.test import test
 from tma_flutter.modules.targets.sources.view import view
 from tma_flutter.modules.targets.sources.example import example
 from tma_flutter.modules.targets.sources.feature import feature
@@ -36,11 +37,11 @@ def make_presentation_module(project_name: str):
     test_name = test.name(project_name)
     interface_name = interface.name(project_name)
 
-    example.make_target(example_name=example_name)
+    example.make_target(example_name)
     view.make_target(view_name)
     feature.make_target(feature_name)
-    # test.make_target(test_name)
-    # interface.make_target(interface_name)
+    test.make_target(test_name)
+    interface.make_target(interface_name)
 
     example.copy_template(
         example_name=example_name,
@@ -50,6 +51,31 @@ def make_presentation_module(project_name: str):
         view_name=view_name,
         feature_name=feature_name,
     )
+    feature.copy_template(
+        feature_name=feature_name,
+        interface_name=interface_name,
+    )
+    test.copy_template(
+        feature_name=feature_name,
+    )
+    interface.copy_template(
+        interface_name=interface_name,
+    )
 
-    example.add_view_dependency(view_name=view_name)
-    view.add_feature_dependency(feature_name=feature_name)
+    example.add_view_dependency(
+        view_name=view_name,
+    )
+    view.add_dependency(
+        feature_name=feature_name,
+    )
+    feature.add_dependency(
+        interface_name=interface_name,
+    )
+    test.add_dependency(
+        feature_name=feature_name,
+        interface_name=interface_name,
+    )
+    # interface.add_dependency(
+    #     target_name="",
+    #     target_path="",
+    # )
