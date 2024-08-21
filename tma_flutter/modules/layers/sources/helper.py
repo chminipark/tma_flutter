@@ -24,6 +24,29 @@ def make_domain_module(
     test.make_target(test_name)
     interface.make_target(interface_name)
 
+    feature.copy_template(
+        feature_name=feature_name,
+        interface_name=interface_name,
+    )
+    test.copy_template(
+        feature_name=feature_name,
+    )
+    interface.copy_template(
+        interface_name=interface_name,
+    )
+
+    feature.add_dependency(
+        interface_name=interface_name,
+    )
+    test.add_dependency(
+        feature_name=feature_name,
+        interface_name=interface_name,
+    )
+    # interface.add_dependency(
+    #     target_name="",
+    #     target_path="",
+    # )
+
 
 def make_presentation_module(project_name: str):
     current_path = Path(os.getcwd())

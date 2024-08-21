@@ -8,7 +8,10 @@ app = typer.Typer()
 
 @app.command(name="make")
 def make_module(project_name: Annotated[str, typer.Argument()]):
-    helper.make_domain_module(project_name=project_name, layer_name="core")
+    helper.make_domain_module(
+        project_name=project_name,
+        layer_name="core",
+    )
 
 
 if __name__ == "__main__":

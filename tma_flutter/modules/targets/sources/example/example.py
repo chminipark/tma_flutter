@@ -37,11 +37,20 @@ def copy_template(
         copy_file_parent_path=template_path.joinpath("lib"),
         file_name="main.dart",
         template_variables={
+            "example_snake": example_name,
+            "example_pascal": template.pascal_case(example_name),
+        },
+        to_save_path=lib_path.joinpath(f"main.dart"),
+    )
+    template.copy(
+        copy_file_parent_path=template_path.joinpath("lib"),
+        file_name="example.dart",
+        template_variables={
             "example_pascal": template.pascal_case(example_name),
             "view_snake": view_name,
             "view_pascal": template.pascal_case(view_name),
         },
-        to_save_path=lib_path.joinpath(f"main.dart"),
+        to_save_path=lib_path.joinpath(f"{example_name}.dart"),
     )
 
 

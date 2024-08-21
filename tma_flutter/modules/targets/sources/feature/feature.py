@@ -19,7 +19,7 @@ def make_target(
 
 
 def name(project_name: str) -> str:
-    return project_name + "_" + "feature"
+    return project_name
 
 
 def copy_template(
