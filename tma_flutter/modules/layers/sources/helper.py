@@ -42,10 +42,6 @@ def make_domain_module(
         feature_name=feature_name,
         interface_name=interface_name,
     )
-    # interface.add_dependency(
-    #     target_name="",
-    #     target_path="",
-    # )
 
 
 def make_presentation_module(module_name: str):
@@ -98,7 +94,3 @@ def make_presentation_module(module_name: str):
         feature_name=feature_name,
         interface_name=interface_name,
     )
-    # interface.add_dependency(
-    #     target_name="",
-    #     target_path="",
-    # )

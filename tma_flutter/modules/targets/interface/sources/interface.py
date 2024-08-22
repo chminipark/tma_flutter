@@ -37,19 +37,6 @@ def copy_template(interface_name: str):
     )
 
 
-def add_dependency(
-    target_name: str,
-    target_path: str,
-):
-    interface_path = _get_interface_path()
-    os.chdir(interface_path)
-    flutter.add_dependency(
-        target_name=target_name,
-        target_path=target_path,
-    )
-    os.chdir(interface_path.parent)
-
-
 def _get_interface_path() -> Path:
     return Path(os.getcwd()).joinpath("interfaces")
 
