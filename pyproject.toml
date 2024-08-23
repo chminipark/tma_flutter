@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tma_flutter"
-version = "0.1.6"
+version = "0.1.7"
 description = ""
 authors = ["chminii <chminipark@gmail.com>"]
 readme = "README.md"
@@ -14,6 +14,7 @@ tma_flutter = "tma_flutter.main:app"
 python = "^3.12"
 typer = {extras = ["all"], version = "^0.12.4"}
 jinja2 = "^3.1.4"
+pyyaml = "^6.0.2"
 
 
 [build-system]

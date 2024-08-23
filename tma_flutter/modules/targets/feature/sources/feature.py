@@ -18,7 +18,11 @@ def make_target(
     )
 
 
-def name(module_name: str) -> str:
+def presentation_name(module_name: str) -> str:
+    return module_name + "_" + "feature"
+
+
+def domain_name(module_name: str) -> str:
     return module_name
 
 
@@ -44,14 +48,10 @@ def copy_template(
 
 
 def add_dependency(interface_name: str):
-    feature_path = _get_feature_path()
-    os.chdir(feature_path)
-    flutter.add_dependency(
-        target_name=interface_name,
-        target_path="../interfaces",
+    flutter.add_dependencies(
+        dependency_names=[interface_name],
+        pubspec_path=_get_feature_path(),
     )
-    os.chdir(feature_path.parent)
-    return
 
 
 def _get_feature_path() -> Path:

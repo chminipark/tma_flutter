@@ -5,6 +5,12 @@ packages:
   - domain/**
   - core/**
 
+command:
+  bootstrap:
+    environment:
+      sdk: ^3.5.0
+      flutter: ">=1.17.0"
+
 scripts:
   test_all:
     # Only run the test command when the package has a test directory

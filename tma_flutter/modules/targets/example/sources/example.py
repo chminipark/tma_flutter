@@ -1,4 +1,4 @@
-import typer, os, shutil
+import typer, os
 from typing_extensions import Annotated
 from pathlib import Path
 from tma_flutter.snippets.sources import flutter, template
@@ -56,13 +56,10 @@ def copy_template(
 
 
 def add_view_dependency(view_name: str):
-    example_path = _get_example_path()
-    os.chdir(example_path)
-    flutter.add_dependency(
-        target_name=view_name,
-        target_path="../views",
+    flutter.add_dependencies(
+        dependency_names=[view_name],
+        pubspec_path=_get_example_path(),
     )
-    os.chdir(example_path.parent)
 
 
 def _get_example_path() -> Path:

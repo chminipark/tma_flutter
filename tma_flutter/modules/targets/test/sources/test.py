@@ -47,21 +47,24 @@ def copy_template(feature_name: str):
     )
 
 
-def add_dependency(
+def add_dependency_presentation(
+    view_name: str,
+    interface_name: str,
+):
+    flutter.add_dependencies(
+        dependency_names=[view_name, interface_name],
+        pubspec_path=_get_test_path(),
+    )
+
+
+def add_dependency_domain(
     feature_name: str,
     interface_name: str,
 ):
-    test_path = _get_test_path()
-    os.chdir(test_path)
-    flutter.add_dependency(
-        target_name=feature_name,
-        target_path="../features",
+    flutter.add_dependencies(
+        dependency_names=[feature_name, interface_name],
+        pubspec_path=_get_test_path(),
     )
-    flutter.add_dependency(
-        target_name=interface_name,
-        target_path="../interfaces",
-    )
-    os.chdir(test_path.parent)
 
 
 def _get_test_path() -> Path:

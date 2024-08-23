@@ -20,7 +20,7 @@ def make_target(
 
 
 def name(module_name: str) -> str:
-    return module_name + "_" + "view"
+    return module_name
 
 
 def copy_template(
@@ -46,13 +46,10 @@ def copy_template(
 
 
 def add_dependency(feature_name: str):
-    view_path = _get_view_path()
-    os.chdir(view_path)
-    flutter.add_dependency(
-        target_name=feature_name,
-        target_path="../features",
+    flutter.add_dependencies(
+        dependency_names=[feature_name],
+        pubspec_path=_get_view_path(),
     )
-    os.chdir(view_path.parent)
 
 
 def _get_view_path() -> Path:

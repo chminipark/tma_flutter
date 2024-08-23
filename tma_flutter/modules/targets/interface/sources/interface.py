@@ -1,6 +1,7 @@
 import typer, os
 from typing_extensions import Annotated
 from pathlib import Path
+from typing import List
 from tma_flutter.snippets.sources import flutter, template
 
 
@@ -34,6 +35,13 @@ def copy_template(interface_name: str):
         copy_file="interface.dart",
         paste_path=lib_path,
         paste_file=f"{interface_name}.dart",
+    )
+
+
+def add_dependency(dependency_names: List[str]):
+    flutter.add_dependencies(
+        dependency_names=dependency_names,
+        pubspec_path=_get_interface_path(),
     )
 
 

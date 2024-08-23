@@ -1,4 +1,8 @@
+import yaml
+from pathlib import Path
+from typing import List
 from tma_flutter.snippets.sources import shell
+import yaml.loader
 
 
 def create_package(package_name: str, dir_name: str):
@@ -20,18 +24,22 @@ def create_app(app_name: str, dir_name: str):
     shell.run_script(commands)
 
 
-def add_dependency(
-    target_name: str,
-    target_path: str,
+def add_dependencies(
+    dependency_names: List[str],
+    pubspec_path: Path,
 ):
-    target_path = f'''"path":"{target_path}"'''
-    target_path = "{" + target_path + "}"
-    target_path = target_name + ":" + target_path
-    target_path = "'" + target_path + "'"
+    if not dependency_names:
+        return
 
-    shell.run_script(
-        [
-            "dart pub add",
-            target_path,
-        ]
-    )
+    pubspec_path = pubspec_path.joinpath("pubspec.yaml")
+
+    dependencies = "dependencies"
+    with open(pubspec_path, "r") as f:
+        pubspec = yaml.safe_load(f)
+        if dependencies not in pubspec:
+            pubspec[dependencies] = dict()
+        dependency_dict = {name: "any" for name in dependency_names}
+        pubspec[dependencies].update(dependency_dict)
+
+    with open(pubspec_path, "w") as f:
+        yaml.dump(pubspec, f, default_flow_style=False, sort_keys=False)
