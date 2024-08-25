@@ -88,7 +88,7 @@ def make_presentation_module(
         interface_name=interface_name,
     )
 
-    example.add_view_dependency(
+    example.add_dependency(
         view_name=view_name,
     )
     view.add_dependency(

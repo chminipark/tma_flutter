@@ -13,7 +13,7 @@ def init_melos(project_name: Annotated[str, typer.Argument()]):
     template_path = Path(__file__).absolute().parent.parent.joinpath("templates")
     template.copy(
         copy_path=template_path,
-        copy_file="pubspec.yaml",
+        copy_file="pubspec.yaml.template",
         paste_path=current_path,
         paste_file="pubspec.yaml",
         template_variables={
@@ -22,12 +22,18 @@ def init_melos(project_name: Annotated[str, typer.Argument()]):
     )
     template.copy(
         copy_path=template_path,
-        copy_file="melos.yaml",
+        copy_file="melos.yaml.template",
         paste_path=current_path,
         paste_file="melos.yaml",
         template_variables={
             "project_snake": project_name,
         },
+    )
+    template.copy(
+        copy_path=template_path,
+        copy_file=".gitignore.template",
+        paste_path=current_path,
+        paste_file=".gitignore",
     )
 
     shell.run_script(["dart pub add", "dev:melos:6.1.0"])

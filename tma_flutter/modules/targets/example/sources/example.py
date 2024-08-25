@@ -55,7 +55,7 @@ def copy_template(
     )
 
 
-def add_view_dependency(view_name: str):
+def add_dependency(view_name: str):
     flutter.add_dependencies(
         dependency_names=[view_name],
         pubspec_path=_get_example_path(),
