@@ -4,6 +4,7 @@ packages:
   - presentation/**
   - domain/**
   - core/**
+  - shared/**
 
 command:
   bootstrap:

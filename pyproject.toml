@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tma_flutter"
-version = "0.1.8"
+version = "0.1.9"
 description = ""
 authors = ["chminii <chminipark@gmail.com>"]
 readme = "README.md"
