@@ -13,9 +13,8 @@ def make_module(
     dependency_names: Annotated[Optional[List[str]], typer.Option("-dp")] = None,
 ):
     helper.make_domain_module(
-        module_name=module_name,
-        layer_name="domain",
-        dependency_names=dependency_names,
+        module_name,
+        dependency_names,
     )
 
 

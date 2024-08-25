@@ -1,18 +1,11 @@
-import typer, os
-from typing_extensions import Annotated
+import os
 from pathlib import Path
 from typing import List
 from tma_flutter.snippets.sources import flutter, template
 
 
-app = typer.Typer()
-
-
-@app.command(name="make")
-def make_target(
-    interface_name: Annotated[str, typer.Argument()],
-    dir_name: Annotated[str, typer.Argument()] = "interfaces",
-):
+def make_target(interface_name: str):
+    dir_name = "interfaces"
     flutter.create_package(
         package_name=interface_name,
         dir_name=dir_name,
@@ -47,7 +40,3 @@ def add_dependency(dependency_names: List[str]):
 
 def _get_interface_path() -> Path:
     return Path(os.getcwd()).joinpath("interfaces")
-
-
-if __name__ == "__main__":
-    app()

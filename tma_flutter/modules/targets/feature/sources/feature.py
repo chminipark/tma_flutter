@@ -1,17 +1,10 @@
-import typer, os
-from typing_extensions import Annotated
+import os
 from pathlib import Path
 from tma_flutter.snippets.sources import flutter, template
 
 
-app = typer.Typer()
-
-
-@app.command(name="make")
-def make_target(
-    feature_name: Annotated[str, typer.Argument()],
-    dir_name: Annotated[str, typer.Argument()] = "features",
-):
+def make_target(feature_name: str):
+    dir_name = "features"
     flutter.create_package(
         package_name=feature_name,
         dir_name=dir_name,
@@ -56,7 +49,3 @@ def add_dependency(interface_name: str):
 
 def _get_feature_path() -> Path:
     return Path(os.getcwd()).joinpath("features")
-
-
-if __name__ == "__main__":
-    app()

@@ -10,11 +10,10 @@ from tma_flutter.modules.targets.feature.sources import feature
 
 def make_domain_module(
     module_name: str,
-    layer_name: str,
     dependency_names: List[str] = [],
 ):
     current_path = Path(os.getcwd())
-    module_path = current_path.joinpath(layer_name).joinpath(module_name)
+    module_path = current_path.joinpath(module_name)
     Path(module_path).mkdir(parents=True, exist_ok=True)
     os.chdir(module_path)
 
@@ -53,7 +52,7 @@ def make_presentation_module(
     dependency_names: List[str] = [],
 ):
     current_path = Path(os.getcwd())
-    module_path = current_path.joinpath("presentation").joinpath(module_name)
+    module_path = current_path.joinpath(module_name)
     Path(module_path).mkdir(parents=True, exist_ok=True)
     os.chdir(module_path)
 

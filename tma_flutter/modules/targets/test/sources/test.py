@@ -1,17 +1,10 @@
-import typer, os
-from typing_extensions import Annotated
+import os
 from pathlib import Path
 from tma_flutter.snippets.sources import flutter, template
 
 
-app = typer.Typer()
-
-
-@app.command(name="make")
-def make_target(
-    test_name: Annotated[str, typer.Argument()],
-    dir_name: Annotated[str, typer.Argument()] = "tests",
-):
+def make_target(test_name: str):
+    dir_name = "tests"
     flutter.create_package(
         package_name=test_name,
         dir_name=dir_name,
@@ -69,7 +62,3 @@ def add_dependency_domain(
 
 def _get_test_path() -> Path:
     return Path(os.getcwd()).joinpath("tests")
-
-
-if __name__ == "__main__":
-    app()
