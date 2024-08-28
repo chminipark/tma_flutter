@@ -82,5 +82,7 @@ Please type {false_set}.
 
 
 def prefix_module_name(module_name: str) -> str:
-    prefix = os.getenv(TMA_PREFIX).strip()
+    prefix = os.getenv(TMA_PREFIX)
+    if prefix != None:
+        prefix = prefix.strip()
     return module_name if not prefix else prefix + "_" + module_name
