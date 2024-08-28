@@ -1,6 +1,6 @@
 import yaml
 from pathlib import Path
-from tma_flutter.snippets.sources import flutter
+from tma_flutter.shared.snippets.sources import flutter
 
 
 def test_add_dependency():
