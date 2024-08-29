@@ -1,6 +1,5 @@
 import os
-from tma_flutter.snippets.sources import flutter
-from tma_flutter.snippets.sources import template
+from tma_flutter.shared.snippets.sources import flutter, template
 from pathlib import Path
 
 

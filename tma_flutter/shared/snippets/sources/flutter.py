@@ -1,7 +1,7 @@
 import yaml
 from pathlib import Path
 from typing import List
-from tma_flutter.snippets.sources import shell
+from tma_flutter.shared.snippets.sources import shell
 import yaml.loader
 
 

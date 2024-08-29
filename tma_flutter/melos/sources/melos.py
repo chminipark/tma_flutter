@@ -1,7 +1,7 @@
 import typer, os
 from pathlib import Path
 from typing_extensions import Annotated
-from tma_flutter.snippets.sources import template, shell
+from tma_flutter.shared.snippets.sources import template, shell
 
 
 app = typer.Typer()

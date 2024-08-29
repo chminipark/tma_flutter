@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from typing import List
-from tma_flutter.snippets.sources import flutter, template
+from tma_flutter.shared.snippets.sources import flutter, template
 
 
 def make_target(interface_name: str):

@@ -7,7 +7,7 @@ from tma_flutter.modules.targets.test.sources import test
 from tma_flutter.modules.targets.view.sources import view
 from tma_flutter.modules.targets.example.sources import example
 from tma_flutter.modules.targets.feature.sources import feature
-from tma_flutter.snippets.sources import prefix
+from tma_flutter.shared.snippets.sources import prefix
 
 
 app = typer.Typer()
