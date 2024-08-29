@@ -17,12 +17,16 @@ app = typer.Typer()
 def make_module(
     module_name: Annotated[str, typer.Argument()],
     dependency_names: Annotated[Optional[List[str]], typer.Option("-dp")] = None,
+    no_prefix: Annotated[bool, typer.Option("--no-prefix")] = False,
 ):
-    if not module_name.strip():
+    module_name = module_name.strip()
+    if not module_name:
         print("Please input module name without spacing")
         return
 
-    new_module_name = prefix.make_new_module_name(module_name)
+    new_module_name = (
+        module_name if no_prefix else prefix.make_new_module_name(module_name)
+    )
     if new_module_name == None:
         return
 

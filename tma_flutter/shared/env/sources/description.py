@@ -16,7 +16,7 @@ new module name used for creating local package and app."""
     echo.command(
         description="""you don't want to use prefix module name,
 then use "--no-prefix" option""",
-        command="$ tma_flutter [presentation/domain] --no-prefix [your module name]",
+        command="$ tma_flutter [presentation/domain] make [your module name] --no-prefix",
     )
 
     echo.command(
